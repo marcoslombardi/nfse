@@ -84,7 +84,7 @@ public class WSParametrosMunicipais implements NFSeLogger {
         } else {
             final var nfSeParametrosMunicipaisAliquotasResponse = this.objectMapper.convertValue(this.objectMapper.readTree(response.body()), NFSeParametrosMunicipaisAliquotasResponse.class);
             return nfSeParametrosMunicipaisAliquotasResponse.getAliquotas() != null && nfSeParametrosMunicipaisAliquotasResponse.getAliquotas().containsKey(codigoServicoFormatado) ?
-                    nfSeParametrosMunicipaisAliquotasResponse.getAliquotas().get(codigoServicoFormatado).getFirst() :
+                    nfSeParametrosMunicipaisAliquotasResponse.getAliquotas().get(codigoServicoFormatado).get(0) :
                     null;
         }
     }

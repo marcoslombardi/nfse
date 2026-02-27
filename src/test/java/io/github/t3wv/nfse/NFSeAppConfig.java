@@ -1,7 +1,5 @@
 package io.github.t3wv.nfse;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,35 +8,27 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 
-public class NFSeConfigTest implements NFSeConfig {
+import org.apache.commons.lang3.StringUtils;
 
-    private final String certificadoPath;
-    private final String certificadoSenha;
-    private final String cadeiaCertificadosPath;
-    private final String cadeiaCertificadosSenha;
+public class NFSeAppConfig implements NFSeConfig {
 
     private KeyStore keyStoreCertificado = null;
     private KeyStore keyStoreCadeia = null;
+    
+	@Override
+	public String getCertificadoSenha() {
+		return "";
+	}
 
-    public NFSeConfigTest() {
-        this.certificadoPath = "/tmp/nfse/certificado.pfx";
-        this.certificadoSenha = "";
-        this.cadeiaCertificadosPath = "/tmp/nfse/nfse_cacerts.jks";
-        this.cadeiaCertificadosSenha = "";
-    }
-
-    public String getCertificadoSenha() {
-        return certificadoSenha;
-    }
-
-    public String getCadeiaCertificadosSenha() {
-        return cadeiaCertificadosSenha;
-    }
+	@Override
+	public String getCadeiaCertificadosSenha() {
+		return "";
+	}
 
     public KeyStore getKeyStoreCertificado() throws KeyStoreException {
-        if (this.keyStoreCertificado == null && StringUtils.isNotBlank(this.certificadoPath)) {
+        if (this.keyStoreCertificado == null && StringUtils.isNotBlank("/tmp/nfse/certificado.pfx")) {
             this.keyStoreCertificado = KeyStore.getInstance("PKCS12");
-            try (InputStream certificadoStream = new FileInputStream(this.certificadoPath)) {
+            try (InputStream certificadoStream = new FileInputStream("/tmp/nfse/certificado.pfx")) {
                 this.keyStoreCertificado.load(certificadoStream, this.getCertificadoSenha().toCharArray());
             } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
                 this.keyStoreCadeia = null;
@@ -49,9 +39,9 @@ public class NFSeConfigTest implements NFSeConfig {
     }
 
     public KeyStore getKeyStoreCadeia() throws KeyStoreException {
-        if (this.keyStoreCadeia == null && StringUtils.isNotBlank(this.cadeiaCertificadosPath)) {
+        if (this.keyStoreCadeia == null && StringUtils.isNotBlank("/tmp/nfse/cacerts.jks")) {
             this.keyStoreCadeia = KeyStore.getInstance("JKS");
-            try (InputStream cadeia = new FileInputStream(this.cadeiaCertificadosPath)) {
+            try (InputStream cadeia = new FileInputStream("/tmp/nfse/nfse_cacerts.jks")) {
                 this.keyStoreCadeia.load(cadeia, this.getCadeiaCertificadosSenha().toCharArray());
             } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
                 this.keyStoreCadeia = null;
@@ -61,7 +51,9 @@ public class NFSeConfigTest implements NFSeConfig {
         return this.keyStoreCadeia;
     }
 
-    public boolean isTeste() {
-        return true;
-    }
+	@Override
+	public boolean isTeste() {
+		return false;
+	}
+
 }
