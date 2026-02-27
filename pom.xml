@@ -26,6 +26,11 @@
             <name>Diego Fincatto</name>
             <url>https://github.com/fincatto</url>
         </developer>
+        <developer>
+            <id>marcoslombardi</id>
+            <name>Marcos Lombardi</name>
+            <url>https://github.com/marcoslombardi</url>
+        </developer>
     </developers>
     <properties>
         <java.version>17</java.version>
