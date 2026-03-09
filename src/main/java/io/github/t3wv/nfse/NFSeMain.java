@@ -192,7 +192,7 @@ public class NFSeMain {
 								.setValores(new NFSeSefinNacionalInfoIBSCBSInfoValoresIBSCBS()
 										.setTrib(new NFSeSefinNacionalInfoIBSCBSInfoTributos()
 												.setgIBSCBS(new NFSeSefinNacionalInfoIBSCBSInfoTributosGIBSCBS()
-														.setCST("01")
+														.setCST("001")
 														.setcClassTrib("000001"))))));
 	}
 
