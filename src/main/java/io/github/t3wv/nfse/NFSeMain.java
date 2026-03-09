@@ -128,7 +128,7 @@ public class NFSeMain {
 		// XSD: TCInfoPessoa -- CNPJ/CPF/NIF (choice obrigatorio) + xNome obrigatorio
 		// Tomador e opcional no infDPS (minOccurs="0"), mas normalmente exigido pelos municipios.
 		NFSeSefinNacionalInfoPessoa tomador = new NFSeSefinNacionalInfoPessoa()
-				.setCNPJ("99999999000191")
+				.setCNPJ("11074845000148")
 				.setNome("TOMADOR TESTE LTDA")
 				.setEndereco(new NFSeSefinNacionalEndereco()
 						.setEnderecoNacional(new NFSeSefinNacionalEnderNac()
@@ -143,11 +143,11 @@ public class NFSeMain {
 						// Id obrigatorio -- gerado conforme padrao TSIdDPS
 						.setId(idDPS)
 						.setTipoAmbiente(NFSeSefinNacionalTipoAmbiente.HOMOLOGACAO)
-						.setDataHoraEmissao(ZonedDateTime.of(2025, 10, 23, 10, 33, 19, 0, ZoneId.of("-03:00")))
+						.setDataHoraEmissao(ZonedDateTime.of(2026, 3, 9, 10, 33, 19, 0, ZoneId.of("-03:00")))
 						.setVersaoApp("NFSe Fake Teste 1.0")
 						.setSerie("901")
 						.setNumeroDPS(numeroDps)
-						.setDataInicioPrestacaoServico(LocalDate.of(2025, 10, 23))
+						.setDataInicioPrestacaoServico(LocalDate.of(2026, 3, 9))
 						.setTipoEmitente(NFSeSefinNacionalInfDPSTipoEmitente.PRESTADOR)
 						.setCodigoMunicipioEmissao(cMunEmissao)
 						.setPrestador(prestador)
@@ -192,7 +192,7 @@ public class NFSeMain {
 								.setValores(new NFSeSefinNacionalInfoIBSCBSInfoValoresIBSCBS()
 										.setTrib(new NFSeSefinNacionalInfoIBSCBSInfoTributos()
 												.setgIBSCBS(new NFSeSefinNacionalInfoIBSCBSInfoTributosGIBSCBS()
-														.setCST("001")
+														.setCST("000") // tributacao integral (aliquota cheia IBS/CBS)
 														.setcClassTrib("000001"))))));
 	}
 
