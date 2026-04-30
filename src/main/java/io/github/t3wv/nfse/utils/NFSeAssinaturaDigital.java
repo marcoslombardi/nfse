@@ -106,14 +106,14 @@ public class NFSeAssinaturaDigital implements NFSeLogger {
         final KeyStore.PrivateKeyEntry keyEntry = getPrivateKeyEntry();
 
         final String dn = ((X509Certificate) keyEntry.getCertificate()).getSubjectX500Principal().getName();
-        this.getLogger().debug("DN: {}", dn);
+        this.getLogger().info("DN: {}", dn);
 
         final String cn = new LdapName(dn).getRdns().stream()
                 .filter(rdn -> "CN".equalsIgnoreCase(rdn.getType()))
                 .map(val -> String.valueOf(val.getValue()))
                 .findFirst()
                 .orElse("");
-        this.getLogger().debug("CN: {}", cn);
+        this.getLogger().info("CN: {}", cn);
 
 
         final XMLSignatureFactory signatureFactory = XMLSignatureFactory.getInstance("DOM");
@@ -156,7 +156,7 @@ public class NFSeAssinaturaDigital implements NFSeLogger {
         for (Enumeration<String> e = ks.aliases(); e.hasMoreElements(); ) {
             final String alias = e.nextElement();
             if (ks.isKeyEntry(alias)) {
-                this.getLogger().debug("Usando alias descoberto: '{}'", alias);
+                this.getLogger().info("Usando alias descoberto: '{}'", alias);
                 return (KeyStore.PrivateKeyEntry) ks.getEntry(alias, passwordProtection);
             }
         }

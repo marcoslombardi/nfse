@@ -1,16 +1,5 @@
 package io.github.t3wv.nfse.municipal;
 
-import io.github.t3wv.nfse.NFSeConfig;
-import io.github.t3wv.nfse.NFSeConfigTest;
-import io.github.t3wv.nfse.NFSeLogger;
-import io.github.t3wv.nfse.municipal.nfseSPBarueri.WSBarueri;
-import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.*;
-import io.github.t3wv.nfse.municipal.nfseSPBarueri.enums.*;
-import io.github.t3wv.nfse.municipal.nfseSPBarueri.services.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
 import java.io.InputStream;
 import java.net.URI;
 import java.nio.file.Files;
@@ -19,6 +8,35 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import io.github.t3wv.nfse.NFSeConfig;
+import io.github.t3wv.nfse.NFSeConfigTest;
+import io.github.t3wv.nfse.NFSeLogger;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.WSBarueri;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.NFSeBarueriRPSArquivoEnvio;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.NFSeBarueriRPSArquivoEnvioRegistro;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.NFSeBarueriRPSArquivoEnvioRegistroTipo1;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.NFSeBarueriRPSArquivoEnvioRegistroTipo2;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.NFSeBarueriRPSArquivoEnvioRegistroTipo4;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.NFSeBarueriRPSArquivoEnvioRegistroTipo9;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.NFSeBarueriRPSArquivoRetornoRegistro;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.arquivos.NFSeBarueriRPSArquivoRetornoRegistroTipo2;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.enums.NFSeBarueriArquivoRetornoSituacaoArquivo;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.enums.NFSeBarueriLocalPrestacaoServico;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.enums.NFSeBarueriMotivoCancelamento;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.enums.NFSeBarueriPais;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.enums.NFSeBarueriSituacao;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.services.NFSeBarueriLoteBaixarArquivoRequest;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.services.NFSeBarueriLoteBaixarArquivoResponse;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.services.NFSeBarueriLoteBaixarArquivoResult;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.services.NFSeBarueriLoteEnviarArquivoRequest;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.services.NFSeBarueriLoteEnviarArquivoResponse;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.services.NFSeBarueriLoteStatusArquivoRequest;
+import io.github.t3wv.nfse.municipal.nfseSPBarueri.services.NFSeBarueriLoteStatusArquivoResponse;
 
 @Disabled
 public class NFSeSPBarueriTest implements NFSeLogger {
@@ -147,7 +165,7 @@ public class NFSeSPBarueriTest implements NFSeLogger {
 
                     //salva o pdf da emissao
                     try (final InputStream in = new URI(String.format("http://testeeiss.barueri.sp.gov.br/nfe/wfimagemnota.aspx?codigoautenticidade=%s&numdoc=%s", codigoAtenticidade, tomadorDocumento)).toURL().openStream()) {
-                        this.getLogger().debug("Download PDF nota servico Barueri: {} {}", codigoAtenticidade, tomadorDocumento);
+                        this.getLogger().info("Download PDF nota servico Barueri: {} {}", codigoAtenticidade, tomadorDocumento);
                         Files.write(Path.of("/tmp/%s_%s_emitida.pdf".formatted(rps, numero)), in.readAllBytes());
                     }
 
@@ -229,7 +247,7 @@ public class NFSeSPBarueriTest implements NFSeLogger {
                     } else {
                         //salva o pdf do cancelamento
                         try (final InputStream in = new URI(String.format("http://testeeiss.barueri.sp.gov.br/nfe/wfimagemnota.aspx?codigoautenticidade=%s&numdoc=%s", codigoAtenticidade, tomadorDocumento)).toURL().openStream()) {
-                            this.getLogger().debug("Download PDF nota servico Barueri: {} {}", codigoAtenticidade, tomadorDocumento);
+                            this.getLogger().info("Download PDF nota servico Barueri: {} {}", codigoAtenticidade, tomadorDocumento);
                             Files.write(Path.of("/tmp/%s_%s_cancelada.pdf".formatted(rps, numero)), in.readAllBytes());
                         }
                     }

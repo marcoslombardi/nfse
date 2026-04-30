@@ -40,7 +40,7 @@ public class WSLoteNFe implements NFSeLogger {
 
     public NFSeSPSaoPauloRetornoEnvioLoteRPS enviarRPS(NFSeSPSaoPauloRequestEnvioRPS pedidoEnvioRPS) throws Exception {
         final var body = String.format("<?xml version=\"1.0\" encoding=\"utf-8\"?><soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"><soap12:Body><EnvioRPSRequest xmlns=\"http://www.prefeitura.sp.gov.br/nfe\"><VersaoSchema>%s</VersaoSchema><MensagemXML><![CDATA[%s]]></MensagemXML></EnvioRPSRequest></soap12:Body></soap12:Envelope>", pedidoEnvioRPS.getCabecalho().getVersao(), new NFSeAssinaturaDigital(this.config).setOmitirDeclaracaoXML(true).setUsarIdComoReferencia(false).assinarDocumento(NFSeSPSaoPauloUtils.assinarRPSs(config, pedidoEnvioRPS).toXml()));
-        this.getLogger().debug("Enviando RPS para o município de São Paulo com xml: {}", body);
+        this.getLogger().info("Enviando RPS para o município de São Paulo com xml: {}", body);
 
         final var response = new NFSeHttpClient(this.config).sendPostRequest(new URI(URL_BASE), Map.of("Content-Type", "application/soap+xml; charset=utf-8"), body);
         final var responseBody = StringUtils.trimToEmpty(response.body()); // Trim no body porque o webservice retorna espaços em branco antes do XML
@@ -56,7 +56,7 @@ public class WSLoteNFe implements NFSeLogger {
 
     public NFSeSPSaoPauloRetornoConsultaNFe enviarPedidoConsultaNFe(NFSeSPSaoPauloRequestConsultaNFe pedidoConsultaNFe) throws Exception {
         final var body = String.format("<?xml version=\"1.0\" encoding=\"utf-8\"?><soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"><soap12:Body><ConsultaNFeRequest xmlns=\"http://www.prefeitura.sp.gov.br/nfe\"><VersaoSchema>%s</VersaoSchema><MensagemXML><![CDATA[%s]]></MensagemXML></ConsultaNFeRequest></soap12:Body></soap12:Envelope>", pedidoConsultaNFe.getCabecalho().getVersao(), new NFSeAssinaturaDigital(this.config).setOmitirDeclaracaoXML(true).setUsarIdComoReferencia(false).assinarDocumento(pedidoConsultaNFe.toXml()));
-        this.getLogger().debug("Enviando consulta de NFe para o município de São Paulo com xml: {}", body);
+        this.getLogger().info("Enviando consulta de NFe para o município de São Paulo com xml: {}", body);
 
         final var response = new NFSeHttpClient(this.config).sendPostRequest(new URI(URL_BASE), Map.of("Content-Type", "application/soap+xml; charset=utf-8"), body);
         final var responseBody = StringUtils.trimToEmpty(response.body()); // Trim no body porque o webservice retorna espaços em branco antes do XML
