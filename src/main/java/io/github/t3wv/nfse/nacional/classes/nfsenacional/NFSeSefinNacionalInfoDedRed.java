@@ -10,11 +10,11 @@ import org.simpleframework.xml.*;
 @Root(name = "vDedRed")
 public class NFSeSefinNacionalInfoDedRed {
 
-    @Element(name = "pDR")
+    @Element(name = "pDR", required = false)
     protected String percentualPadrao;
-    @Element(name = "vDR")
+    @Element(name = "vDR", required = false)
     protected String valorMonetarioPadrao;
-    @Element(name = "documentos")
+    @Element(name = "documentos", required = false)
     protected NFSeSefinNacionalListaDocDedRed documentos;
 
     public String getPercentualPadrao() {
