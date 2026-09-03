@@ -3,15 +3,17 @@ package io.github.t3wv.nfse.nacional.classes.nfsenacional;
 
 import org.simpleframework.xml.*;
 
+import java.math.BigDecimal;
+
 @Root(name = "BeneficioMunicipal")
 public class NFSeSefinNacionalBeneficioMunicipal {
 
     @Element(name = "nBM")
     protected String numeroBeneficio;
     @Element(name = "vRedBCBM", required = false)
-    protected String valorReducaoBaseCalculoBeneficioMunicipal;
+    protected BigDecimal valorReducaoBaseCalculoBeneficioMunicipal;
     @Element(name = "pRedBCBM", required = false)
-    protected String percentualReducaoBaseCalculoBeneficioMunicipal;
+    protected BigDecimal percentualReducaoBaseCalculoBeneficioMunicipal;
 
     /**
      * Identificador do benefício municipal parametrizado pelo município.
@@ -35,7 +37,7 @@ public class NFSeSefinNacionalBeneficioMunicipal {
      * Valor monetário informado pelo emitente para redução da base de cálculo (BC) do ISSQN devido a um Benefício Municipal (BM)
      * @return valorReducaoBaseCalculoBeneficioMunicipal
      */
-    public String getValorReducaoBaseCalculoBeneficioMunicipal() {
+    public BigDecimal getValorReducaoBaseCalculoBeneficioMunicipal() {
         return valorReducaoBaseCalculoBeneficioMunicipal;
     }
 
@@ -44,7 +46,7 @@ public class NFSeSefinNacionalBeneficioMunicipal {
      *
      * @param valorReducaoBaseCalculoBeneficioMunicipal valorReducaoBaseCalculoBeneficioMunicipal
      */
-    public NFSeSefinNacionalBeneficioMunicipal setValorReducaoBaseCalculoBeneficioMunicipal(String valorReducaoBaseCalculoBeneficioMunicipal) {
+    public NFSeSefinNacionalBeneficioMunicipal setValorReducaoBaseCalculoBeneficioMunicipal(BigDecimal valorReducaoBaseCalculoBeneficioMunicipal) {
         this.valorReducaoBaseCalculoBeneficioMunicipal = valorReducaoBaseCalculoBeneficioMunicipal;
         return this;
     }
@@ -53,7 +55,7 @@ public class NFSeSefinNacionalBeneficioMunicipal {
      * Valor percentual informado pelo emitente para redução da base de cálculo (BC) do ISSQN devido a um Benefício Municipal (BM)
      * @return percentualReducaoBaseCalculoBeneficioMunicipal
      */
-    public String getPercentualReducaoBaseCalculoBeneficioMunicipal() {
+    public BigDecimal getPercentualReducaoBaseCalculoBeneficioMunicipal() {
         return percentualReducaoBaseCalculoBeneficioMunicipal;
     }
 
@@ -62,7 +64,7 @@ public class NFSeSefinNacionalBeneficioMunicipal {
      *
      * @param percentualReducaoBaseCalculoBeneficioMunicipal percentualReducaoBaseCalculoBeneficioMunicipal
      */
-    public NFSeSefinNacionalBeneficioMunicipal setPercentualReducaoBaseCalculoBeneficioMunicipal(String percentualReducaoBaseCalculoBeneficioMunicipal) {
+    public NFSeSefinNacionalBeneficioMunicipal setPercentualReducaoBaseCalculoBeneficioMunicipal(BigDecimal percentualReducaoBaseCalculoBeneficioMunicipal) {
         this.percentualReducaoBaseCalculoBeneficioMunicipal = percentualReducaoBaseCalculoBeneficioMunicipal;
         return this;
     }

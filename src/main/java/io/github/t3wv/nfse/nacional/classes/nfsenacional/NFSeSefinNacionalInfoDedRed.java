@@ -3,6 +3,8 @@ package io.github.t3wv.nfse.nacional.classes.nfsenacional;
 
 import org.simpleframework.xml.*;
 
+import java.math.BigDecimal;
+
 /**
  * Grupo de informações relativas ao valores para dedução/redução do valor da base de cálculo (valor do serviço)
  */
@@ -11,26 +13,26 @@ import org.simpleframework.xml.*;
 public class NFSeSefinNacionalInfoDedRed {
 
     @Element(name = "pDR", required = false)
-    protected String percentualPadrao;
+    protected BigDecimal percentualPadrao;
     @Element(name = "vDR", required = false)
-    protected String valorMonetarioPadrao;
+    protected BigDecimal valorMonetarioPadrao;
     @Element(name = "documentos", required = false)
     protected NFSeSefinNacionalListaDocDedRed documentos;
 
-    public String getPercentualPadrao() {
+    public BigDecimal getPercentualPadrao() {
         return percentualPadrao;
     }
 
-    public NFSeSefinNacionalInfoDedRed setPercentualPadrao(String percentualPadrao) {
+    public NFSeSefinNacionalInfoDedRed setPercentualPadrao(BigDecimal percentualPadrao) {
         this.percentualPadrao = percentualPadrao;
         return this;
     }
 
-    public String getValorMonetarioPadrao() {
+    public BigDecimal getValorMonetarioPadrao() {
         return valorMonetarioPadrao;
     }
 
-    public NFSeSefinNacionalInfoDedRed setValorMonetarioPadrao(String valorMonetarioPadrao) {
+    public NFSeSefinNacionalInfoDedRed setValorMonetarioPadrao(BigDecimal valorMonetarioPadrao) {
         this.valorMonetarioPadrao = valorMonetarioPadrao;
         return this;
     }
