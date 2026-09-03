@@ -30,7 +30,7 @@ public class NFSeSefinNacionalInfNFSe {
     protected String ambienteGeracao;
     @Element(name = "tpEmis", required = true)
     protected NFSeSefinNacionalInfNFSeTipoEmissao tipoEmissao;
-    @Element(name = "procEmi", required = true)
+    @Element(name = "procEmi", required = false)
     protected NFSeSefinNacionalInfNFSeProcessoEmissao processoEmissao;
     @Element(name = "cStat", required = true)
     protected String codigoStatus;
@@ -152,7 +152,7 @@ public class NFSeSefinNacionalInfNFSe {
         return processoEmissao;
     }
 
-    public NFSeSefinNacionalInfNFSe setProcessoEmissao(NFSeSefinNacionalInfNFSeProcessoEmissao value) {
+    public NFSeSefinNacionalInfNFSe setProcessoEmissao(NFSeSefinNacionalInfNFSeProcessoEmissao processoEmissao) {
         this.processoEmissao = processoEmissao;
         return this;
     }
