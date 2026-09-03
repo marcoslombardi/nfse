@@ -10,38 +10,38 @@ import java.io.StringWriter;
 import java.math.BigDecimal;
 
 public class NFSeSCSaoJoseNFSeIBSCBSValoresTribGDif {
-    @Element(name = "pDifUF")
-    private String pDifUF;
+    @Element(name = "pDifUF", required = false)
+    private BigDecimal pDifUF;
 
-    @Element(name = "pDifMun")
-    private String pDifMun;
+    @Element(name = "pDifMun", required = false)
+    private BigDecimal pDifMun;
 
-    @Element(name = "pDifCBS")
-    private String pDifCBS;
+    @Element(name = "pDifCBS", required = false)
+    private BigDecimal pDifCBS;
 
-    public String getpDifUF() {
+    public BigDecimal getpDifUF() {
         return pDifUF;
     }
 
-    public NFSeSCSaoJoseNFSeIBSCBSValoresTribGDif setpDifUF(String pDifUF) {
+    public NFSeSCSaoJoseNFSeIBSCBSValoresTribGDif setpDifUF(BigDecimal pDifUF) {
         this.pDifUF = pDifUF;
         return this;
     }
 
-    public String getpDifMun() {
+    public BigDecimal getpDifMun() {
         return pDifMun;
     }
 
-    public NFSeSCSaoJoseNFSeIBSCBSValoresTribGDif setpDifMun(String pDifMun) {
+    public NFSeSCSaoJoseNFSeIBSCBSValoresTribGDif setpDifMun(BigDecimal pDifMun) {
         this.pDifMun = pDifMun;
         return this;
     }
 
-    public String getpDifCBS() {
+    public BigDecimal getpDifCBS() {
         return pDifCBS;
     }
 
-    public NFSeSCSaoJoseNFSeIBSCBSValoresTribGDif setpDifCBS(String pDifCBS) {
+    public NFSeSCSaoJoseNFSeIBSCBSValoresTribGDif setpDifCBS(BigDecimal pDifCBS) {
         this.pDifCBS = pDifCBS;
         return this;
     }
