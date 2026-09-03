@@ -11,20 +11,19 @@ import java.math.BigDecimal;
 
 public class NFSeSCSaoJoseNFSeIBSCBSValoresTribGTribRegular {
     @Element(name = "CSTReg")
-    private String CSTReg;
+    private String cstReg;
     @Element(name = "cClassTribReg")
     private String cClassTribReg;
 
-    public String getCSTReg() {
-        return CSTReg;
-    }
+    public String getCstReg() {
+		return cstReg;
+	}
 
-    public NFSeSCSaoJoseNFSeIBSCBSValoresTribGTribRegular setCSTReg(String CSTReg) {
-        this.CSTReg = CSTReg;
-        return this;
-    }
+	public void setCstReg(String cstReg) {
+		this.cstReg = cstReg;
+	}
 
-    public String getcClassTribReg() {
+	public String getcClassTribReg() {
         return cClassTribReg;
     }
 
