@@ -8,11 +8,11 @@ public class NFSeSefinNacionalInfoIBSCBSInfoTributosGIBSCBSGTribRegular {
     @Element(name="cClassTribReg")
     protected String cClassTribReg;
 
-    public String getcstReg() {
+    public String getCstReg() {
         return cstReg;
     }
 
-    public NFSeSefinNacionalInfoIBSCBSInfoTributosGIBSCBSGTribRegular setcstReg(String cstReg) {
+    public NFSeSefinNacionalInfoIBSCBSInfoTributosGIBSCBSGTribRegular setCstReg(String cstReg) {
         this.cstReg = cstReg;
         return this;
     }
