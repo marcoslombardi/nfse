@@ -11,10 +11,10 @@ import org.simpleframework.xml.Root;
 @Root(name = "obra")
 public class NFSeSefinNacionalInfoObra {
 
-    @Element(name = "cObra", required = false)
-    String numeroIdentificacaoObra;
     @Element(name = "inscImobFisc", required = false)
     String inscricaoImobiliariaFiscal;
+    @Element(name = "cObra", required = false)
+    String numeroIdentificacaoObra;
     @Element(name = "cCIB", required = false)
     String cCIB;
     @Element(name = "end", required = false)
