@@ -15,6 +15,7 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.lang3.StringUtils;
 
+import io.github.t3wv.nfse.NFSeConfig;
 import io.github.t3wv.nfse.NFSeLogger;
 import io.github.t3wv.nfse.municipal.nfseSPBarueri.WSBarueri;
 import io.github.t3wv.nfse.municipal.nfseSPSaoPaulo.WSLoteNFe;
@@ -28,6 +29,14 @@ import io.github.t3wv.nfse.nacional.WSSefinNFSe;
 public abstract class NFSeCadeiaCertificados implements NFSeLogger {
 
     private static final int PORT = 443;
+
+    /**
+     * @deprecated use {@link #geraCadeiaCertificados(String)} informando diretamente a senha da cadeia de certificados.
+     */
+    @Deprecated
+    public static byte[] geraCadeiaCertificados(final NFSeConfig config) throws Exception {
+        return NFSeCadeiaCertificados.geraCadeiaCertificados(config.getCadeiaCertificadosSenha());
+    }
 
     public static byte[] geraCadeiaCertificados(final String senha) throws Exception {
         final KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
