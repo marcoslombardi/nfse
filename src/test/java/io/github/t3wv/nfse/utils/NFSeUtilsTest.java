@@ -69,9 +69,8 @@ public class NFSeUtilsTest {
     /**
      * Testa geração do ID de eventos de NFSe nacional.
      * Padrão do ID:
-     * "PRE" + Chave de Acesso da NFSe (44) + Código do Evento (6) + Número do Pedido de Registro do Evento (3)
+     * "PRE" + Chave de Acesso da NFSe (50) + Código do Evento (6)
      */
-    @Disabled
     @Test
     public void testeFormatoPedidoRegistroEventoId() {
         final var evento = new NFSeSefinNacionalPedRegEvt();
@@ -81,7 +80,7 @@ public class NFSeUtilsTest {
         Assertions.assertThrows(AssertionError.class, () -> NFSeUtils.gerarEventoId(evento));
 
         evento.getInfPedReg().setEvento(new NFSeSefinNacionalInfPedRegTE101101());
-        Assertions.assertEquals("PRE12345123451234512134512345123451234512345123451234101101001", NFSeUtils.gerarEventoId(evento));
+        Assertions.assertEquals("PRE12345123451234512134512345123451234512345123451234101101", NFSeUtils.gerarEventoId(evento));
     }
 
     @Test
