@@ -46,7 +46,7 @@ public class NFSeSefinNacionalInfNFSe {
     protected String informacoesUsoAdministracaoTributaria;
     @Element(name = "IBSCBS", required = false)
     protected NFSeSefinNacionalInfNFSeIBSCBS ibsCbs;
-    @Element(name = "DPS", required = false)
+    @Element(name = "DPS", required = true)
     protected NFSeSefinNacionalDPS dps;
     @Attribute(name = "Id", required = false)
     protected String id;
