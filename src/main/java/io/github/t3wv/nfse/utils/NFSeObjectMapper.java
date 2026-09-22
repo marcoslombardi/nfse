@@ -11,7 +11,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.TimeZone;
 
 /**
  * ObjectMapper customizado para desserialização de NFSe, com configurações específicas.
@@ -31,7 +30,7 @@ public class NFSeObjectMapper extends ObjectMapper {
         this.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         this.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
         this.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-        this.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+        this.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
         this.registerModule(new JavaTimeModule());
         this.registerModule(new SimpleModule().addDeserializer(BigDecimal.class, new StdScalarDeserializer<>(BigDecimal.class) {
             @Override
