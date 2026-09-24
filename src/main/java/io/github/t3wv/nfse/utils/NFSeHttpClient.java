@@ -41,13 +41,13 @@ public class NFSeHttpClient implements NFSeLogger {
 
     public <T> HttpResponse<T> sendGetRequest(final URI uri, HttpResponse.BodyHandler<T> responseBodyHandler) throws Exception {
         this.getLogger().debug("Realizando GET em: {}", uri.toString());
-        try (final var httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).followRedirects(HttpClient.Redirect.NORMAL).sslContext(this.getSslContext()).build()) {
-            return httpClient.send(HttpRequest.newBuilder()
-                    .GET()
-                    .uri(uri)
-                    .headers("Content-Type", "application/json; charset=utf-8")
-                    .timeout(Duration.ofSeconds(config.getHttpGetTimeoutSegundos()))
-                    .build(), responseBodyHandler);
+        final var httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).followRedirects(HttpClient.Redirect.NORMAL).sslContext(this.getSslContext()).build();
+        try {
+            return httpClient.send(HttpRequest.newBuilder().GET().uri(uri).headers("Content-Type", "application/json; charset=utf-8").timeout(Duration.ofSeconds(config.getHttpGetTimeoutSegundos())).build(), responseBodyHandler);
+        } finally {
+            if (httpClient instanceof AutoCloseable closeable) {
+                closeable.close();
+            }
         }
     }
 
@@ -57,13 +57,13 @@ public class NFSeHttpClient implements NFSeLogger {
 
     public HttpResponse<String> sendPostRequest(final URI uri, final Map<String, String> headers, final String body) throws Exception {
         this.getLogger().debug("Realizando POST em: {}", uri.toString());
-        try (final var httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).followRedirects(HttpClient.Redirect.NORMAL).sslContext(this.getSslContext()).build()) {
-            return httpClient.send(HttpRequest.newBuilder()
-                    .POST(HttpRequest.BodyPublishers.ofString(body))
-                    .headers(headers.entrySet().stream().flatMap(entry -> Stream.of(entry.getKey(), entry.getValue())).toArray(String[]::new))
-                    .timeout(Duration.ofSeconds(config.getHttpPostTimeoutSegundos()))
-                    .uri(uri)
-                    .build(), HttpResponse.BodyHandlers.ofString());
+        final var httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).followRedirects(HttpClient.Redirect.NORMAL).sslContext(this.getSslContext()).build();
+        try {
+            return httpClient.send(HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(body)).headers(headers.entrySet().stream().flatMap(entry -> Stream.of(entry.getKey(), entry.getValue())).toArray(String[]::new)).timeout(Duration.ofSeconds(config.getHttpPostTimeoutSegundos())).uri(uri).build(), HttpResponse.BodyHandlers.ofString());
+        } finally {
+            if (httpClient instanceof AutoCloseable closeable) {
+                closeable.close();
+            }
         }
     }
 

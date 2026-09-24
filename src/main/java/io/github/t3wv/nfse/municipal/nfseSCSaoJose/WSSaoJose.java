@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Base64;
 
-public class WSSaoJose  implements NFSeLogger {
+public class WSSaoJose implements NFSeLogger {
 
     private static final String URL_PRODUCAO = "https://saojose.atende.net/atende.php?pg=rest&service=WNERestServiceNFSe&cidade=padrao";
     private final String credentials;
@@ -27,7 +27,8 @@ public class WSSaoJose  implements NFSeLogger {
     }
 
     public NFSeSCSaoJoseEmissaoRetorno enviarEmissaoNFSe(final NFSeSCSaoJoseEmissaoEnvio arquivoEmissao, final String filename) throws Exception {
-        try (HttpClient client = HttpClient.newHttpClient()) {
+        final var client = HttpClient.newHttpClient();
+        try {
             this.getLogger().info("Request emissão NFSe com xml: {}", arquivoEmissao.toXml());
             final var response = client.send(this.buildRequest(arquivoEmissao.toXml(), filename), HttpResponse.BodyHandlers.ofString());
             final var responseBody = StringUtils.trimToEmpty(response.body());
@@ -40,11 +41,16 @@ public class WSSaoJose  implements NFSeLogger {
                 this.getLogger().info("NFSe emitida: {}", responseBody);
                 return new NFSePersister(true, registryMatcher).read(NFSeSCSaoJoseEmissaoRetorno.class, responseBody);
             }
+        } finally {
+            if (client instanceof AutoCloseable closeable) {
+                closeable.close();
+            }
         }
     }
 
     public NFSeSCSaoJoseCancelamentoRetorno enviarCancelamentoNFSe(final NFSeSCSaoJoseCancelamentoEnvio arquivoCancelamento, final String filename) throws Exception {
-        try (HttpClient client = HttpClient.newHttpClient()) {
+        final var client = HttpClient.newHttpClient();
+        try {
             this.getLogger().info("Request cancelamento NFSe com xml: {}", arquivoCancelamento.toXml());
             final var response = client.send(this.buildRequest(arquivoCancelamento.toXml(), filename), HttpResponse.BodyHandlers.ofString());
             final var responseBody = StringUtils.trimToEmpty(response.body()); // Trim no body porque o webservice retorna espaços em branco antes do XML
@@ -57,11 +63,16 @@ public class WSSaoJose  implements NFSeLogger {
                 this.getLogger().info("NFSe cancelada: {}", responseBody);
                 return new NFSePersister(true, registryMatcher).read(NFSeSCSaoJoseCancelamentoRetorno.class, responseBody);
             }
+        } finally {
+            if (client instanceof AutoCloseable closeable) {
+                closeable.close();
+            }
         }
     }
 
     public NFSeSCSaoJoseCancelamentoRetorno enviarSolicitacaoCancelamentoNFSe(final NFSeSCSaoJoseCancelamentoSolicitacaoEnvio arquivoCancelamento, final String filename) throws Exception {
-        try (HttpClient client = HttpClient.newHttpClient()) {
+        final var client = HttpClient.newHttpClient();
+        try {
             this.getLogger().info("Request de solicitação de cancelamento NFSe com xml: {}", arquivoCancelamento.toXml());
             final var response = client.send(this.buildRequest(arquivoCancelamento.toXml(), filename), HttpResponse.BodyHandlers.ofString());
             final var responseBody = StringUtils.trimToEmpty(response.body());
@@ -74,11 +85,16 @@ public class WSSaoJose  implements NFSeLogger {
                 this.getLogger().info("Solicitacao de cancelamento de NFSe registrada: {}", responseBody);
                 return new NFSePersister(true, registryMatcher).read(NFSeSCSaoJoseCancelamentoRetorno.class, responseBody);
             }
+        } finally {
+            if (client instanceof AutoCloseable closeable) {
+                closeable.close();
+            }
         }
     }
 
     public NFSeSCSaoJosePesquisaCodigoAutenticidadeRetorno consultaNFSeCodigoAutenticidade(final NFSeSCSaoJosePesquisaCodigoAutenticidadeEnvio arquivoPesquisa, final String filename) throws Exception {
-        try (HttpClient client = HttpClient.newHttpClient()) {
+        final var client = HttpClient.newHttpClient();
+        try {
             this.getLogger().info("Request de consulta de NFSe com xml: {}", arquivoPesquisa.toXml());
             final var response = client.send(this.buildRequest(arquivoPesquisa.toXml(), filename), HttpResponse.BodyHandlers.ofString());
             final var responseBody = StringUtils.trimToEmpty(response.body());
@@ -90,6 +106,10 @@ public class WSSaoJose  implements NFSeLogger {
                 registryMatcher.bind(BigDecimal.class, new NFSeBigDecimalTransformer());
                 this.getLogger().info("NFSe localizada: {}", responseBody);
                 return new NFSePersister(true, registryMatcher).read(NFSeSCSaoJosePesquisaCodigoAutenticidadeRetorno.class, responseBody);
+            }
+        } finally {
+            if (client instanceof AutoCloseable closeable) {
+                closeable.close();
             }
         }
     }
