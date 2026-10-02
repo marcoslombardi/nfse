@@ -33,7 +33,7 @@ public class NFSeSefinNacionalInfNFSe {
     @Element(name = "procEmi", required = false)
     protected NFSeSefinNacionalInfNFSeProcessoEmissao processoEmissao;
     @Element(name = "cStat", required = true)
-    protected String codigoStatus;
+    protected NFSeSefinNacionalInfNFSeSituacao situacao;
     @Element(name = "dhProc", required = true)
     protected ZonedDateTime dataHoraProcessamento;
     @Element(name = "nDFSe", required = false)
@@ -159,12 +159,12 @@ public class NFSeSefinNacionalInfNFSe {
         return this;
     }
 
-    public String getCodigoStatus() {
-        return codigoStatus;
+    public NFSeSefinNacionalInfNFSeSituacao getSituacao() {
+        return situacao;
     }
 
-    public NFSeSefinNacionalInfNFSe setCodigoStatus(String codigoStatus) {
-        this.codigoStatus = codigoStatus;
+    public NFSeSefinNacionalInfNFSe setSituacao(NFSeSefinNacionalInfNFSeSituacao situacao) {
+        this.situacao = situacao;
         return this;
     }
 
