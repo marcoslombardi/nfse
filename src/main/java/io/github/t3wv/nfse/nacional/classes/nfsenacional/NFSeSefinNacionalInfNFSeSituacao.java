@@ -12,7 +12,6 @@ import org.simpleframework.xml.Root;
 public enum NFSeSefinNacionalInfNFSeSituacao {
 
     GERADA("100", "NFS-e Gerada"),
-    SUBSTITUICAO_GERADA("101", "NFS-e de Substituição Gerada"),
     DECISAO_JUDICIAL("102", "NFS-e de Decisão Judicial"),
     AVULSA("103", "NFS-e Avulsa"),
     MEI("107", "NFS-e MEI");
